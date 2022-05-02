@@ -1,0 +1,49 @@
+import 'dart:io';
+import 'dart:core';
+
+void main(){
+  print("Morse Code: \n");
+    var str = stdin.readLineSync();
+  
+  if(is_valid(str)==1){
+    decoder(str,"");
+  }
+  else{
+    print("Not Valid");
+  } 
+}
+
+int is_valid(var str){
+    for(var i=0;i<26;i++){
+      if(str==morsecode[i])
+        return 1;
+    }
+    return 0;
+}
+
+void decoder(var decode, var morse){
+  if(decode.length == 0){
+     print(morse);
+  }
+   
+  else{
+    for(int i=0;i<26;i++){
+      if(decode.startsWith(morsecode[i])){
+        var cur_morse = morse + alphabet[i];
+        var cur_decode = decode.substring(morsecode[i].length);
+        decoder(cur_decode, cur_morse);
+      }
+    }
+  }
+}
+
+var morsecode = [".-", "-...", "-.-.", "-..", ".", "..-.",
+             "--.", "....", "..", ".---", "-.-", ".-..",
+             "--", "-.", "---", ".--.", "--.-", ".-.",
+             "...", "-", "..-", "...-", ".--", "-..-",
+             "-.--", "--.."];
+var alphabet = ["A", "B", "C", "D", "E", "F",
+                "G", "H", "I", "J", "K", "L",
+                "M", "N", "O", "P", "Q", "R",
+                "S", "T", "U", "V", "W", "X",
+                "Y", "Z"];
